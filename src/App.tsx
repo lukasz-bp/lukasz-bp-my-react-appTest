@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useFetchGames } from "./useFetchGames";
 import Article from "./AppScheduledGames";
 import Nav from "./AppNav";
@@ -18,6 +18,17 @@ export default function App() {
   const [modalMessage, setModalMessage] = useState("");
   //
   const { games: fetchedGames, isLoading, error } = useFetchGames(gameDate);
+  //
+  useEffect(
+    function () {
+      if (!selectedGame) return;
+      document.title = `Game | ${selectedGame?.homeTeam?.abbrev} vs ${selectedGame?.awayTeam?.abbrev} `;
+      return function () {
+        document.title = "NHLSchedule";
+      };
+    },
+    [selectedGame],
+  );
   //
   function handleSetGameDate(gameDate: Date) {
     const seasonStart = new Date(2024, 9, 4); // the month is 0-indexed
