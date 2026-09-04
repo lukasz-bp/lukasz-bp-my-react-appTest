@@ -431,6 +431,11 @@ article {
   article {
     border-left: 8px solid #f3f3f3;
   }
+
+  .myGames {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 /* ----- callendar ----- */
